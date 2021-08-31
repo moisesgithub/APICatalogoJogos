@@ -37,7 +37,7 @@ namespace ExemploApiCatalogoJogos.Controllers.V1
         {
             var jogos = await _jogoService.Obter(pagina, quantidade);
 
-            if (jogos.Count() == 0)
+            if (jogos.Count == 0)
                 return NoContent();
 
             return Ok(jogos);
