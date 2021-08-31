@@ -23,7 +23,7 @@ namespace ExemploApiCatalogoJogos.Repositories
             var comando = $"select * from Jogos order by id offset {((pagina - 1) * quantidade)} rows fetch next {quantidade} rows only";
 
             await sqlConnection.OpenAsync();
-            SqlCommand sqlCommand = new SqlCommand(comando, sqlConnection);
+            SqlCommand sqlCommand = new(comando, sqlConnection);
             SqlDataReader sqlDataReader = await sqlCommand.ExecuteReaderAsync();
 
             while (sqlDataReader.Read())
@@ -49,7 +49,7 @@ namespace ExemploApiCatalogoJogos.Repositories
             var comando = $"select * from Jogos where Id = '{id}'";
 
             await sqlConnection.OpenAsync();
-            SqlCommand sqlCommand = new SqlCommand(comando, sqlConnection);
+            SqlCommand sqlCommand = new(comando, sqlConnection);
             SqlDataReader sqlDataReader = await sqlCommand.ExecuteReaderAsync();
 
             while (sqlDataReader.Read())
@@ -75,7 +75,7 @@ namespace ExemploApiCatalogoJogos.Repositories
             var comando = $"select * from Jogos where Nome = '{nome}' and Produtora = '{produtora}'";
 
             await sqlConnection.OpenAsync();
-            SqlCommand sqlCommand = new SqlCommand(comando, sqlConnection);
+            SqlCommand sqlCommand = new(comando, sqlConnection);
             SqlDataReader sqlDataReader = await sqlCommand.ExecuteReaderAsync();
 
             while (sqlDataReader.Read())
@@ -99,7 +99,7 @@ namespace ExemploApiCatalogoJogos.Repositories
             var comando = $"insert Jogos (Id, Nome, Produtora, Preco) values ('{jogo.Id}', '{jogo.Nome}', '{jogo.Produtora}', {jogo.Preco.ToString().Replace(",", ".")})";
 
             await sqlConnection.OpenAsync();
-            SqlCommand sqlCommand = new SqlCommand(comando, sqlConnection);
+            SqlCommand sqlCommand = new(comando, sqlConnection);
             sqlCommand.ExecuteNonQuery();
             await sqlConnection.CloseAsync();
         }
@@ -109,7 +109,7 @@ namespace ExemploApiCatalogoJogos.Repositories
             var comando = $"update Jogos set Nome = '{jogo.Nome}', Produtora = '{jogo.Produtora}', Preco = {jogo.Preco.ToString().Replace(",", ".")} where Id = '{jogo.Id}'";
 
             await sqlConnection.OpenAsync();
-            SqlCommand sqlCommand = new SqlCommand(comando, sqlConnection);
+            SqlCommand sqlCommand = new(comando, sqlConnection);
             sqlCommand.ExecuteNonQuery();
             await sqlConnection.CloseAsync();
         }
@@ -119,7 +119,7 @@ namespace ExemploApiCatalogoJogos.Repositories
             var comando = $"delete from Jogos where Id = '{id}'";
 
             await sqlConnection.OpenAsync();
-            SqlCommand sqlCommand = new SqlCommand(comando, sqlConnection);
+            SqlCommand sqlCommand = new(comando, sqlConnection);
             sqlCommand.ExecuteNonQuery();
             await sqlConnection.CloseAsync();
         }
